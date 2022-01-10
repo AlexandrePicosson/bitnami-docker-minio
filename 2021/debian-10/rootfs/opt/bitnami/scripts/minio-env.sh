@@ -75,3 +75,4 @@ MINIO_ROOT_PASSWORD="${MINIO_ROOT_PASSWORD:-"${MINIO_SECRET_KEY:-}"}"
 export MINIO_ROOT_PASSWORD="${MINIO_ROOT_PASSWORD:-miniosecret}"
 
 # Custom environment variables may be defined below
+export MINIO_STARTUP_TIMEOUT=${MINIO_STARTUP_TIMEOUT:-10}
