@@ -94,7 +94,7 @@ is_minio_live() {
             false
         else
             # We use cURL because we need to check the liveness before the client is configured
-            status_code=$(curl --write-out '%{http_code}\n' --silent --output /dev/null "${MINIO_SCHEME}://127.0.0.1:${MINIO_API_PORT_NUMBER}/minio/health/live")
+            status_code=$(curl --write-out '%{http_code}' --silent --output /dev/null "${MINIO_SCHEME}://127.0.0.1:${MINIO_API_PORT_NUMBER}/minio/health/live")
             if [[ "$status_code" = "200" ]]; then
                 true
             else
@@ -116,7 +116,7 @@ is_minio_live() {
 wait_for_minio() {
     local waited_time
     waited_time=0
-    while ! is_minio_live && [ "${waited_time}" -lt "${MINIO_STARTUP_TIMEOUT}" ]; do
+    while ! is_minio_live && [[ "$waited_time" -lt "$MINIO_STARTUP_TIMEOUT" ]]; do
         sleep 5
         waited_time=$((waited_time+5))
     done
